@@ -4,7 +4,7 @@ import ButtonPanel from './ButtonPanel';
 
 function App() {
   return (
-    <div>
+    <div className="wrapper flex">
       <Display />
       <ButtonPanel />
     </div>
