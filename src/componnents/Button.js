@@ -1,33 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const defineSyle = (wide, color) => {
-  if (wide) {
-    return {
-      bgColor: color,
-      flexBasis: '50%',
-    };
-  }
-  return {
-    bgColor: color,
-    flexBasis: '25%',
+const Button = ({ name, wide, color }) => {
+  const styles = {
+    backgroundColor: color,
+
   };
-};
 
-export default function Button({
-  name, color, wide,
-}) {
-  const bStyle = defineSyle(wide, color);
-  return <button type="button" style={bStyle}>{name}</button>;
-}
-
-Button.propTypes = {
-  name: PropTypes.string.isRequired,
-  color: PropTypes.string,
-  wide: PropTypes.bool,
+  return (
+    <button type="button" className={`${wide ? 'wide' : ''}`} style={styles}>
+      {name}
+    </button>
+  );
 };
 
 Button.defaultProps = {
-  color: '#f5913e',
   wide: false,
+  color: '#e0e0e0',
 };
+
+Button.propTypes = {
+  name: PropTypes.string.isRequired,
+  wide: PropTypes.bool,
+  color: PropTypes.string,
+};
+
+export default Button;
