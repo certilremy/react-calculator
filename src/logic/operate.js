@@ -1,4 +1,4 @@
-import BigJs from 'BigJs.js';
+import BigJs from 'big.js';
 
 const operate = (nOne, nTwo, operation) => {
   const FirstBigJs = BigJs(nOne);
