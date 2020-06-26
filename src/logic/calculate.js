@@ -1,49 +1,74 @@
 import operate from './operate';
 
-const calculate = (data, btnName) => {
-  const bD = data;
-  switch (btnName) {
-    case '0':
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9':
-      bD.next += btnName;
+const calculate = (NuOb, BtnNAme) => {
+  let {
+    next, total, actualData, operation,
+  } = NuOb;
+  switch (BtnNAme) {
+    case '+':
+    case '-':
+    case 'X':
+    case '÷':
+      if (!total) {
+        total = next;
+        next = null;
+        operation = BtnNAme;
+        break;
+      } else {
+        total = operate(total, next, operation);
+        next = null;
+        actualData = total.toString();
+        operation = BtnNAme;
+      }
+
+      break;
+
+    case '=':
+      if (operation === null) { break; }
+
+      next = operate(total, next, operation);
+      total = null;
+      operation = null;
+      actualData = next.toString();
       break;
 
     case '+/-':
-      bD.total *= -1;
-      bD.next *= -1;
+      next *= -1;
+      actualData = next;
       break;
 
     case 'AC':
-      bD.total = '0';
-      bD.next = '0';
-      bD.operation = null;
+      total = null;
+      next = null;
+      actualData = '0';
+      operation = null;
       break;
 
     case '%':
-      if (bD.total && parseFloat(bD.total) > 0) {
-        bD.total = operate(data.total, 100, '÷');
-      }
-
-      if (bD.next && parseFloat(bD.next) > 0) {
-        bD.next = operate(data.next, 100, '÷');
+      if (!total) {
+        ({
+          next, total, actualData, operation,
+        } = calculate({
+          next, total, actualData, operation,
+        }, 'AC'));
+      } else if (operation === '+' || operation === '-') {
+        next = operate(total, next / 100, 'X');
+        actualData = next.toString();
+      } else if (operation === 'X' || operation === '÷') {
+        next = operate(next, 100, '÷');
+        actualData = next.toString();
       }
       break;
 
     default:
-      bD.total = operate(...data);
-      bD.next = '0';
-      bD.operation = null;
+      if (next === null) next = '';
+      next += BtnNAme;
+      actualData = next;
       break;
   }
-  return bD;
+  return {
+    next, total, actualData, operation,
+  };
 };
 
 export default calculate;

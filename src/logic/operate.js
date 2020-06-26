@@ -1,19 +1,26 @@
-import BigJs from 'big.js';
+import Big from 'big.js';
 
-const operate = (nOne, nTwo, operation) => {
-  const FirstBigJs = BigJs(nOne);
-  const BigJsTwo = BigJs(nTwo);
+const operate = (fsNum, scNum, operation) => {
+  let bigOne;
+  let bigTwo;
+  if (fsNum == null || scNum == null) {
+    bigOne = Big(0);
+    bigTwo = Big(0);
+  } else {
+    bigOne = Big(fsNum);
+    bigTwo = Big(scNum);
+  }
   switch (operation) {
     case '-':
-      return FirstBigJs.minus(BigJsTwo);
+      return bigOne.minus(bigTwo);
     case '+':
-      return FirstBigJs.plus(BigJsTwo);
+      return bigOne.plus(bigTwo);
     case 'X':
-      return FirstBigJs.times(BigJsTwo);
+      return bigOne.times(bigTwo);
     case '÷':
-      if (parseFloat(nTwo) === 0) return 'error';
-      if (parseFloat(nTwo) === '.') return 0;
-      return FirstBigJs.div(nTwo);
+      if (parseFloat(scNum) === 0) return 'error';
+      if (parseFloat(scNum) === '.') return 0;
+      return bigOne.div(scNum);
 
     default:
       return -1;
