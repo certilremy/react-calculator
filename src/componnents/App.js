@@ -10,7 +10,7 @@ class App extends React.Component {
       total: null,
       next: null,
       operation: null,
-      actualData: null,
+      actualData: '0',
     };
     this.handleClick = this.handleClick.bind(this);
   }
