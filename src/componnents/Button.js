@@ -6,7 +6,6 @@ const Button = ({
 }) => {
   const styles = {
     backgroundColor: color,
-
   };
 
   const clickHandler = e => {
