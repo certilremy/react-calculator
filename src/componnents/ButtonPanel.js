@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from './Button';
 
-const ButtonPanel = () => {
+const ButtonPanel = ({ clickHandler }) => {
   const labels = [
     ['AC', '+/-', '%', '÷'],
     ['7', '8', '9', 'X'],
@@ -16,6 +17,7 @@ const ButtonPanel = () => {
         name={label}
         key={label}
         wide={label === '0'}
+        onClick={clickHandler}
       />
     ));
 
@@ -27,6 +29,10 @@ const ButtonPanel = () => {
   });
 
   return <div className="buttonPanel d-flex">{buttons}</div>;
+};
+
+ButtonPanel.propTypes = {
+  clickHandler: PropTypes.func.isRequired,
 };
 
 export default ButtonPanel;

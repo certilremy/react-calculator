@@ -7,11 +7,12 @@ const Display = ({ result }) => (
   </div>
 );
 
+Display.defaultProps = {
+  result: '0',
+};
+
 Display.propTypes = {
   result: PropTypes.string,
 };
 
-Display.defaultProps = {
-  result: '0',
-};
 export default Display;
